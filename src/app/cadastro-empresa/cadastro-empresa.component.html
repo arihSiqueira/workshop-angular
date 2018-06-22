@@ -1,0 +1,81 @@
+
+<div class="container">
+
+<div class="form-row">
+  <div class="col-md-6 mb-2">
+    <label>CNPJ</label>
+    <input type="text" class="form-control" type="text" #cnpj>  
+   
+    <button class="btn btn-primary" (click)="buscaCnpj(cnpj.value)">Buscar</button>
+  </div>
+</div>
+
+
+
+
+
+<button *ngIf = "empresa.nome" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+ {{empresa.nome}}
+</button> 
+
+
+  
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Dados da empresa</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+
+            <table class="table table-sm">
+                <tbody>
+                  <tr>
+                    <td class="table-light">{{"Nome da empresa: " | uppercase}}</td>
+                    <td class="table-light">{{empresa.nome}}</td>
+                  </tr>
+                  <tr *ngFor = "let atividade of empresa.atividade_principal">
+                      <td class="table-light">{{"Atividade Principal: " | uppercase}}</td>
+                      <td class="table-light"> {{atividade.text | uppercase}}</td>
+                  </tr>
+                  <tr>
+                      <td class="table-light">{{"Data da Situação: " | uppercase}}</td>
+                      <td class="table-light">  {{empresa.data_situacao}}</td>
+                  </tr>
+
+                  <tr *ngFor = "let qsa of empresa.qsa">
+                      <td class="table-light">{{"Administrador: " | uppercase}}</td>
+                      <td class="table-light">  {{qsa.nome}}</td>
+                  </tr>
+            
+                  
+                 
+              </tbody>
+            
+            </table>
+
+
+
+        </div>
+        <div class="modal-footer">
+           
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>   

@@ -1,0 +1,110 @@
+<div *ngIf="clientes.length" class="container">
+
+  <input type="text" class="form-control" placeholder="pesquisar" #pesquisa (keyup)="0">
+  <table class="table table-hover table-bordered"> 
+    <thead class="thead-light"> 
+      <tr> 
+        
+        <th class="text-uppercase">Nome</th>
+          <th class="text-uppercase">Email</th>
+          <th class="text-uppercase">telefone</th>
+          <th class="text-uppercase">Data</th>
+          
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr *ngFor="let cliente of clientes | filtroCliente:pesquisa.value" 
+        [class.table-primary] = "cliente === clienteSelecionado" 
+        (click)="selecionar(cliente)" data-toggle="modal" data-target="#exampleModal">
+        
+        
+            <td>{{cliente.nome | uppercase}}</td>
+            <td>{{cliente.email}}</td> 
+            <td>{{cliente.telefone}}</td> 
+            <td>{{cliente.nascimento | date:"dd/MM/yyyy"}}   
+                   
+        </tr>
+        </tbody>
+  </table>
+
+
+
+<!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                
+
+                    <div *ngIf = "clienteSelecionado">
+
+                      
+                      
+                          <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                              <label>Nome</label>
+                          <input [(ngModel)]="clienteSelecionado.nome" class="form-control"  placeholder="nome">
+                            </div>
+                          </div>
+                              <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                  <label>Email</label>                        
+                                      <input [(ngModel)]="clienteSelecionado.email" class="form-control"  placeholder="nome">
+                                </div>
+                              </div>                        
+                          <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                              <label>Telefone</label>
+                                <input [(ngModel)]="clienteSelecionado.telefone" class="form-control"  placeholder="nome">
+                            </div>
+                          </div>
+                           <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                  <label>Data de nascimento</label>
+                                  <input [(ngModel)]="clienteSelecionado.nascimento" class="form-control"  placeholder="nome">
+                                </div>
+                          </div>
+                          
+                        
+                      </div>
+
+
+              </div>
+              <div class="modal-footer">
+                  <button type="button"
+                  class="btn btn-danger"
+                  data-toggle="tooltip" 
+                  data-placement="right" 
+                  title="Excluir" (click)="deletar(clienteSelecionado)" data-dismiss="modal">
+                         Excluir 
+                   </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" (click)="editar(clienteSelecionado)" data-dismiss="modal">Salvar mudanças</button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+  <p *ngIf="!clientes">
+    Não há clientes cadastrados
+  </p>
+
+
+ 
+</div>

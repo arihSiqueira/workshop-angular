@@ -1,0 +1,68 @@
+<div class="container">
+    <form [formGroup]="formulario" (submit)="cadastrar($event)" class="needs-validation" novalidate>
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label>Nome</label>
+            <input type="text" class="form-control" 
+              formControlName="nome"
+              placeholder="Nome"
+              [(ngModel)]="cliente.nome"
+               required>
+              <span *ngIf="formulario.controls.nome.valid" class="badge badge-success">Valor Correto</span>
+              <div *ngIf="formulario.controls.nome.invalid">
+                  <span *ngIf="formulario.controls.nome.errors.required" class="badge badge-danger">Campo obrigatório</span>
+                  <span *ngIf="formulario.controls.nome.errors.minlength" class="badge badge-danger">nome pequeno</span>
+              </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label>Email</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+              </div>
+              <input type="email" class="form-control"
+                formControlName="email"
+                placeholder="Email"
+                [(ngModel)]="cliente.email" required>
+            </div>
+            <span *ngIf="formulario.controls.email.valid" class="badge badge-success">Valor Correto</span>
+            <div *ngIf="formulario.controls.email.invalid || formulario.controls.email.pristine">
+                <span *ngIf="formulario.controls.email.errors.required" class="badge badge-danger">Campo obrigatório</span>
+                <span *ngIf="formulario.controls.email.errors.email" class="badge badge-danger">email inválido</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">  
+          <div class="col-md-4 mb-3">
+            <label>Telefone</label>
+            <input type="tel" class="form-control"
+               formControlName="telefone"
+               placeholder="Telefone"
+               [(ngModel)]="cliente.telefone" 
+               mask = "(99) 9999-9999" required>
+               <span *ngIf="formulario.controls.telefone.valid" class="badge badge-success">Valor Correto</span>
+               <span *ngIf="formulario.controls.telefone.invalid" class="badge badge-danger">Campo obrigatório</span>
+         
+          </div>
+        </div>  
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label>Data de Nascimento</label>
+            <input type="date" class="form-control"
+               formControlName="nascimento"
+               [(ngModel)]="cliente.nascimento" required>
+               
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-2 ">
+            <button class="btn btn-primary" [disabled] = "formulario.invalid" type="submit" >Salvar</button>
+          </div>
+          <div class="col-md-2">
+            <a class="btn btn-danger" [routerLink]="['/lista']" >Cancelar</a>
+          </div>  
+        </div>
+    </form>
+</div>   
